@@ -1,0 +1,77 @@
+.bg-bingo {
+    background: rgba(229,9,20,1);
+    background: -moz-linear-gradient(left, rgba(229,9,20,1) 0%, rgba(74,0,4,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(229,9,20,1)), color-stop(100%, rgba(74,0,4,1)));
+    background: -webkit-linear-gradient(left, rgba(229,9,20,1) 0%, rgba(74,0,4,1) 100%);
+    background: -o-linear-gradient(left, rgba(229,9,20,1) 0%, rgba(74,0,4,1) 100%);
+    background: -ms-linear-gradient(left, rgba(229,9,20,1) 0%, rgba(74,0,4,1) 100%);
+    background: linear-gradient(to right, rgba(229,9,20,1) 0%, rgba(74,0,4,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e50914', endColorstr='#4a0004', GradientType=1 );
+
+    color: #FFF;
+}
+
+/* all action buttons */
+.btn-bingo {
+    background-color: #E50914;
+    color: white;
+}
+
+/* B-I-N-G-O balls */
+th span.ball {
+    background-color: rgb(204, 204, 204);
+    color: #000;
+}
+
+/* Number balls */
+a.ball {
+    border: solid 3px darkred;
+}
+a.ball:hover {
+    border-color: #E50914;
+}
+td a.ball.selected {
+    background-color: #E50914;
+    color: white;
+}
+a.ball.selected:hover {
+    border-color: darkred;
+    color: white;
+}
+
+/* Individual 'pattern' boxes */
+#pattern div {
+    border: 1px solid rgb(0, 0, 0); 
+}
+#pattern div.free {
+	background-color: black !important;
+}
+#pattern div.selected {
+	background-color: #E50914;
+}
+
+.lastNumberContainer {
+    border: 1px solid rgb(0, 0, 0); 
+}
+
+/* Settings Title*/
+h1 {
+	color: rgb(0, 0, 0); font-size: 35px;
+}
+
+/* All sub-titles */
+h2 {
+	color: rgb(0, 0, 0); font-size: 25px;
+}
+
+
+.currentValue {
+	color: red;
+}
+
+.historyContainer {
+    border: solid 1px #000;
+}
+.historyContainer .list-group-item {
+    background-color: #deeaee;
+}

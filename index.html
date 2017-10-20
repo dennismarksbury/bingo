@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Dennis Marksbury - dennis.marksbury@gmail.com">
+    <meta name="description" content="Bingo Calling Application">
+    <meta name="keywords" content="">
+
+    <link rel="stylesheet" type="text/css" href="app/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="app/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="app/css/red-theme.css" id="redTheme" disabled="disabled" />
+    <link rel="stylesheet" type="text/css" href="app/css/blue-theme.css" id="blueTheme" disabled="disabled" />
+    <link rel="stylesheet" type="text/css" href="app/css/green-theme.css" id="greenTheme" disabled="disabled" />
+
+    <script type="text/javascript" src="app/js/jquery.js"></script>
+    <script type="text/javascript" src="app/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="app/js/app.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-bingo fixed-top">
+        <span class="navbar-brand" id="title">Navbar</span>
+
+        <ul class="navbar-nav" style="margin-left: 60px;">
+            <li class="nav-item">
+                <a class="nav-link" id="navSettings" onclick="toggleView('settings')">Settings</a>
+            </li>
+            <li class="nav-item" style="margin-left: 60px;">
+                <button id="btnClear" class="btn btn-bingo" onclick="startNewGame()">Begin New Game</button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="bingo-container" id="gameContainer">
+        <div class="row">
+            <div class="col-md-12 boardContainer">
+                <table id="board" border="0" cellpadding="0" cellspacing="0"></table>
+            </div>
+        </div>
+        <div class="row" id="detailRow">
+            <div class="col-md-4 lastNumberContainer">
+                <h2 class="text-center">Current Number</h2>
+                <div class="text-center currentValue">--</div>
+            </div>
+            <div class="col-md-4 historyContainer">
+                <h2 class="text-center">Last Numbers 3</h2>
+                <ul class="list-group history"></ul>
+            </div>
+            <div class="col-md-4 lastNumberContainer">
+                <h2 class="text-center">Winning Pattern</h2>
+                <div>
+                    <div id="pattern">
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div class="free">&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                    </div>
+                    <div class="text-right margin-top-10">
+                        <form class="form-inline">
+                            <select class="form-control form-control-sm" id="lstPatterns" onchange="setPattern(this)">
+                                <option>Select...</option>
+                                <option>4x4</option>
+                                <option>4 Corners</option>
+                                <option>B-N-O</option>
+                                <option>Blackout</option>
+                                <option>'C' for Clermont!</option>
+                                <option>Center Row</option>
+                                <option>Checkers</option>
+                                <option>Checkmark</option>
+                                <option>Cross</option>
+                                <option>'L'</option>
+                                <option>Pyramid</option>
+                                <option>'T'</option>
+                                <option>'X'</option>
+                                <option>'Z'</option>
+                            </select> &nbsp;
+                            <button type="button" id="btnClearPattern" class="btn btn-bingo">Clear Pattern</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center winnerContainer" style="display:none;">
+                <h2 class="text-center">Winners (Last 3)</h2>
+                <ul id="lstWinners" class="list-group"></ul>
+                <div class="text-right margin-top-10">
+                    <button type="button" class="btn btn-default" onclick="clearWinnerList()">Clear</button>
+                    <button type="button" class="btn btn-bingo" onclick="addNewWinner()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bingo-container" id="settingsContainer" style="display: none;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Settings</h1>
+            </div>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="bingoTitle">Title</label>
+                <input type="text" class="form-control" id="bingoTitle" placeholder="Title" onblur="updateTile(this.value)" />
+            </div>
+
+            <div class="form-check">
+                <label>What type of Bingo do you want to play?</label>
+                <div id="ballButtons">
+                    <input type="button" class="btn btn-bingo" value="75 Ball" onclick="renderBoard(this, 15)" />
+                    <input type="button" class="btn btn-default" value="90 Ball" onclick="renderBoard(this, 18)" />
+                    <input type="button" class="btn btn-default" value="30 Ball" onclick="renderBoard(this, 6)" />
+                </div>
+            </div>
+
+            <div class="form-check">
+                <label>Select a theme:</label>
+                <div id="themeButtons">
+                    <input type="button" class="btn btn-bingo" value="Default" onclick="setTheme(this, 'default')" />
+                    <input type="button" class="btn btn-default" value="Red" onclick="setTheme(this, 'red')" />
+                    <input type="button" class="btn btn-default" value="Blue" onclick="setTheme(this, 'blue')" />
+                    <input type="button" class="btn btn-default" value="Green" onclick="setTheme(this, 'green')" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Display Winners List?</label>
+                <button type="button" class="btn btn-default" onclick="displayWinnerList(this)">NO</button>
+            </div>
+        </form>
+
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-12">
+                <div style="padding: 15px; border-top: solid 1px #ccc;">
+                    <button class="btn btn-bingo" id="navHome" onclick="toggleView('game')">Back to Game Board</button>
+
+                    <div class="alert alert-success" role="alert" style="display:none;margin-top: 20px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

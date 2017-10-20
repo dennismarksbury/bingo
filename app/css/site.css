@@ -1,0 +1,199 @@
+/*
+    Min Screen Width = 784
+    
+    Generator
+    https://www.cssmatic.com/gradient-generator
+
+    Palatte
+    https://www.w3schools.com/colors/colors_palettes.asp
+*/
+
+body {
+    font-family: "Times New Roman";
+	padding: 3rem 20px; 
+    min-width: 784px;
+}
+
+.bg-bingo {
+    background: #b1cbbb; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #b1cbbb 0%, #fdffff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #b1cbbb 0%,#fdffff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #b1cbbb 0%,#fdffff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1cbbb', endColorstr='#fdffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    
+    -webkit-box-shadow: 0px 10px 21px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 21px -3px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 21px -3px rgba(0,0,0,0.75);
+
+    color: #000;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.bg-bingo .navbar-brand {
+    font-size: 25px;
+}
+
+.btn-bingo {
+    background-color: #c94c4c;
+    border: solid 2px #eea29a;
+    color: white;
+}
+
+.bingo-container {
+    margin: 15px auto;
+    width: 95%;
+}
+
+.navbar-nav a {
+    cursor: pointer;
+}
+.navbar-nav .nav-link:hover {
+    text-decoration: overline !important;
+}
+.navbar-nav .nav-link.active {
+    text-decoration: underline !important;
+}
+.boardContainer {
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px; 
+	padding: 10px; 
+}
+table#board {
+    background-color: rgb(255, 255, 255);
+	color: black; 
+    font-size: 25px; 
+    font-weight: bold;
+	width: 100%; 
+}
+th span.ball {
+    background-color: rgb(204, 204, 204);
+    border: solid 3px #000;
+    border-radius: 30px;
+    display: block;
+    height: 40px;
+    margin: 2px;
+    color: #000;
+    cursor: default;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;
+}
+a.ball {
+    border: solid 3px #c94c4c;
+    border-radius: 25px;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    margin: 2px;
+    text-align: center;
+    width: 40px;
+}
+a.ball:hover {
+    border-color: #c94c4c;
+}
+td a.ball.selected {
+    background-color: #b1cbbb;
+}
+a.ball.selected:hover {
+    border-color: #c94c4c;
+}
+
+#pattern {
+	margin: 0px auto; 
+    position: relative;
+    width: 158px; 
+}
+#pattern div {
+	border-radius: 5px; 
+    border: 1px solid rgb(0, 0, 0); 
+    border-image: none; 
+    cursor: pointer;
+    display: inline-block; 
+    height: 30px; 
+    position: relative; 
+    width: 30px; 
+}
+#pattern div.free {
+	background-color: black !important;
+}
+#pattern div.selected {
+	background-color: #c94c4c;
+}
+
+.lastNumberContainer {
+    border-radius: 5px; 
+    border: 1px solid rgb(0, 0, 0); 
+    border-image: none;
+	padding: 10px; 
+}
+h1 {
+	color: rgb(0, 0, 0); 
+    font-size: 35px;
+}
+h2 {
+	color: rgb(0, 0, 0); 
+    font-size: 25px;
+    text-decoration: underline;
+}
+.currentValue {
+	color: red; 
+    font-size: 130px; 
+    font-weight: bold;
+    line-height: 130px; 
+}
+.historyContainer {
+    border: solid 1px #000;
+    border-radius: 5px;
+    padding: 10px;
+}
+.historyContainer ul {
+    font-size: 36px;
+    text-align: center;
+}
+.historyContainer .list-group-item {
+    background-color: #deeaee;
+    color: #000;
+    padding: .25rem;
+}
+.winnerContainer {
+    border: solid 1px #000;
+    border-radius: 5px;
+    padding: 10px;
+}
+.winnerContainer ul {
+    font-size: 36px;
+    text-align: center;
+}
+.winnerContainer .list-group-item {
+    background-color: #deeaee;
+    color: #000;
+    padding: .25rem;
+}
+
+#settingsContainer {
+    border: solid 1px #000;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 1215px) {
+    .bingo-container {
+        width: 85%;
+    }
+    th span.ball {
+        height: 60px;
+        width: 60px;
+    }
+    a.ball {
+        border-radius: 33px;
+        height: 60px;
+        width: 60px;
+    }
+    table#board {
+        font-size: 37px;
+    }
+}
