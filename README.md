@@ -7,5 +7,5 @@ Uses the following:
 
 Users can download and run offline.
 
-See an online demo:
-www.dennismarksbury.com/bingo/index.html
+# [DEMO](http://www.dennismarksbury.com/bingo/index.html)
+
