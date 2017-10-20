@@ -6,3 +6,6 @@ Uses the following:
 - jQuery v3.2.1
 
 Users can download and run offline.
+
+See an online demo:
+www.dennismarksbury.com/bingo/index.html
