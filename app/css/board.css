@@ -4,36 +4,35 @@
     border-radius: 5px;
     padding: 10px;
 }
-
 table#board {
     /*background-color: rgb(255, 255, 255);*/
-    color: black;
-    font-size: 37px;
+	color: black; 
+    font-size: 25px; 
     font-weight: bold;
-    width: 100%;
+	width: 100%; 
 }
 th span.ball {
     background-color: rgb(204, 204, 204);
     border: solid 3px #000;
     border-radius: 30px;
     display: block;
-    height: 60px;
+    height: 40px;
     margin: 2px;
     color: #000;
     cursor: default;
     font-weight: bold;
     text-align: center;
-    width: 60px;
+    width: 40px;
 }
 a.ball {
     border: solid 3px #c94c4c;
-    border-radius: 33px;
+    border-radius: 25px;
     cursor: pointer;
     display: block;
-    height: 60px;
+    height: 40px;
     margin: 2px;
     text-align: center;
-    width: 60px;
+    width: 40px;
 }
 a.ball:hover {
     border-color: #c94c4c;
@@ -125,4 +124,22 @@ h2 {
 
 .margin-top-10 {
     margin-top: 10px;
+}
+
+@media screen and (min-width: 1215px) {
+    .bingo-container {
+        width: 85%;
+    }
+    th span.ball {
+        height: 60px;
+        width: 60px;
+    }
+    a.ball {
+        border-radius: 33px;
+        height: 60px;
+        width: 60px;
+    }
+    table#board {
+        font-size: 37px;
+    }
 }

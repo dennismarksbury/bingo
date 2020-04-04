@@ -10,14 +10,14 @@
 
     <link rel="stylesheet" type="text/css" href="app/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="app/css/site.css" />
-    <link rel="stylesheet" type="text/css" href="app/css/card.css" />
+    <link rel="stylesheet" type="text/css" href="app/css/board.css" />
     <link rel="stylesheet" type="text/css" href="app/css/red-theme.css" id="redTheme" disabled="disabled" />
     <link rel="stylesheet" type="text/css" href="app/css/blue-theme.css" id="blueTheme" disabled="disabled" />
     <link rel="stylesheet" type="text/css" href="app/css/green-theme.css" id="greenTheme" disabled="disabled" />
 
     <script type="text/javascript" src="app/js/jquery.js"></script>
     <script type="text/javascript" src="app/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="app/js/card.js"></script>
+    <script type="text/javascript" src="app/js/board.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-bingo fixed-top">
@@ -34,9 +34,63 @@
     </nav>
 
     <div class="bingo-container" id="gameContainer">
-            <div class="boardContainer">
-                <table id="board" border="0" cellpadding="0" cellspacing="0" style="width: 300px; margin:0 auto;"></table>
+        <div class="row">
+            <div class="col-md-12 boardContainer">
+                <table id="board" border="0" cellpadding="0" cellspacing="0"></table>
             </div>
+        </div>
+        <div class="row" id="detailRow">
+            <div class="col-md-4 lastNumberContainer">
+                <h2 class="text-center">Current Number</h2>
+                <div class="text-center currentValue">--</div>
+            </div>
+            <div class="col-md-4 historyContainer">
+                <h2 class="text-center">Last 3 Numbers</h2>
+                <ul class="list-group history"></ul>
+            </div>
+            <div class="col-md-4 lastNumberContainer">
+                <h2 class="text-center">Winning Pattern</h2>
+                <div>
+                    <div id="pattern">
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div class="free">&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                        <div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div><div>&nbsp;</div>
+                    </div>
+                    <div class="text-right margin-top-10">
+                        <form class="form-inline">
+                            <select class="form-control form-control-sm" id="lstPatterns" onchange="setPattern(this)">
+                                <option>Select...</option>
+                                <option>4x4</option>
+                                <option>4 Corners</option>
+                                <option>B-N-O</option>
+                                <option>Blackout</option>
+                                <option>'C' for Clermont!</option>
+                                <option>Center Row</option>
+                                <option>Checkers</option>
+                                <option>Checkmark</option>
+                                <option>Cross</option>
+                                <option>'L'</option>
+                                <option>Pyramid</option>
+                                <option>'T'</option>
+                                <option>'X'</option>
+                                <option>'Z'</option>
+                            </select> &nbsp;
+                            <button type="button" id="btnClearPattern" class="btn btn-bingo">Clear Pattern</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center winnerContainer" style="display:none;">
+                <h2 class="text-center">Winners (Last 3)</h2>
+                <ul id="lstWinners" class="list-group"></ul>
+                <div class="text-right margin-top-10">
+                    <button type="button" class="btn btn-default" onclick="clearWinnerList()">Clear</button>
+                    <button type="button" class="btn btn-bingo" onclick="addNewWinner()">Add</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="bingo-container" id="settingsContainer" style="display: none;">
@@ -71,6 +125,10 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label>Display Winners List?</label>
+                <button type="button" class="btn btn-default" onclick="displayWinnerList(this)">NO</button>
+            </div>
         </form>
 
         <div class="row" style="margin-top: 15px;">
