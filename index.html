@@ -17,14 +17,37 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-bingo fixed-top">
-        <span class="navbar-brand" id="title">Bingo</span>
+        <span class="navbar-brand" id="title">Virtual Bingo</span>
     </nav>
 
-    <div>
-        Welcome to Bingo!  Please make your choice below:
+    <div class="row" style="margin-top:100px;">
 
-        <a href="board.html" class="btn btn-large">Bingo Board</a>
-        <a href="card.html" class="btn btn-large">Bingo Card</a>
+        <div class="col-md-2"></div>
+
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="app/images/bingo-board-card.png" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bingo Caller</h5>
+                    <p class="card-text">Are you hosting a Bingo event?  Use this to track the Bingo numbers as they are called!</p>
+                    <a href="board.html" class="btn btn-primary">Go to Bingo Caller</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="app/images/bingo-card-card.png" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bingo Playing Card</h5>
+                    <p class="card-text">Just playing Bingo? Use this to play Bingo while someone else uses the Bingo Caller!</p>
+                    <a href="card.html" class="btn btn-primary">Go to Bingo Card</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+
     </div>
 
 </body>

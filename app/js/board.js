@@ -2,11 +2,14 @@ var board,
     numberHistory,
     current,
     winners = ['--', '--', '--'],
-    rows = 'BINGO'.split('')
+    rows = 'BINGO'.split(''),
     winnerListEnabled = false,
+    autocallerEnabled = false,
     theme = 'default';
+
 var settings = {
-    title: 'Bingo Caller'
+    title: 'Bingo Caller',
+    autocallerTimerlength: 15000
 };
 
 $(document).ready(init);
@@ -16,10 +19,11 @@ function init() {
     board = $("#board");
     $('#title').text(settings.title);
     $('#bingoTitle').val(settings.title);
+    $('#bingoTimerLength').val(settings.autocallerTimerlength / 1000);
     $('#btnClearPattern').on('click', clearPattern);
     renderBoard(null, 15);
     _renderHistory();
-    _renderWinnerList()
+    _renderWinnerList();
     window.addEventListener("resize", testWidthWidth);
 }
 function initPattern() {
@@ -27,7 +31,7 @@ function initPattern() {
     $('#pattern div').on('click', clickPattern);
 }
 function renderBoard(btn, columns) {
-    if (current != null) {
+    if (current !== null) {
         if (!confirm('It appears you have already started a game.  If you continue, this will reset the game.  Do you wish to continue and start a new game?')) {
             return false;
         }
@@ -258,6 +262,15 @@ function updateTile(value) {
     $('#title').text(settings.title);
     showSaveSuccess('Title saved');
 }
+function updateTimerLength(value) {
+    if (isNaN(value)) {
+        alert('Value must be a number!');
+        return;
+    }
+
+    settings.autocallerTimerlength = parseInt(value) * 1000;
+    showSaveSuccess('Timer saved');
+}
 function showSaveSuccess(msg) {
     $('.alert-success').text(msg).show();
     setTimeout(function () { $('.alert-success').hide(); }, 3000);
@@ -342,21 +355,46 @@ function randomIntFromInterval(min, max) { // min and max included
 }
 
 
-var usedNumbers = [];
-var timer = null;
+var usedNumbers = [],
+    timer = null,
+    timerInterval = 0;
 
-startAutomatedDrawing();
-
-function startAutomatedDrawing() {
-    timer = window.setInterval(drawNumber, 5000);
+function beginTimers(btn) {
+    $(btn).hide();
+    $('#btnPause').show();
+    startTimers();
+}
+function pauseTimers() {
+    window.clearTimeout(timer);
+    $('#btnPause').hide();
+    $('#btnResume').show();
+}
+function resumeTimers() {
+    $('#btnPause').show();
+    $('#btnResume').hide();
+    drawNumber();
+}
+function startTimers() {
+    timer = window.setTimeout(drawNumber, 1000);
+    timerInterval = settings.autocallerTimerlength / 1000;
+     $('#nextNumberIn').text(timerInterval);
 }
 function drawNumber() {
     if (usedNumbers.length === 75) {
-        window.clearInterval(timer);
-        timer = null;
+        stopTimers();
         alert('Game over! All numbers have been used.');
         return;
     }
+
+    if (timerInterval > 1) {
+        timerInterval--;
+        $('#nextNumberIn').text(timerInterval);
+        timer = window.setTimeout(drawNumber, 1000);
+
+        return;
+    }
+
+    timerInterval = settings.autocallerTimerlength / 1000;
 
     var drawnNumber = randomIntFromInterval(1, 75);
     while (usedNumbers.indexOf(drawnNumber) > -1) {
@@ -392,4 +430,23 @@ function drawNumber() {
     }
 
     select(bingoNumber);
+    startTimers();
+}
+function stopTimers() {
+    window.clearInterval(timer);
+    timer = null;
+}
+function enableAutocall(btn) {
+    autocallerEnabled = !autocallerEnabled;
+    if (autocallerEnabled) {
+        $(btn).removeClass('btn-default').addClass('btn-bingo').text('YES');
+        //$('#detailRow .col-md-4').removeClass('col-md-4').addClass('col-md-3');
+        $('.autoCallerContainer').show();
+        showSaveSuccess('Autocaller is now visible.');
+    } else {
+        $(btn).removeClass('btn-bingo').addClass('btn-default').text('NO');
+        //$('#detailRow .col-md-3').removeClass('col-md-3').addClass('col-md-4');
+        $('.autoCallerContainer').hide();
+        showSaveSuccess('Autocaller no longer visible.');
+    }
 }
