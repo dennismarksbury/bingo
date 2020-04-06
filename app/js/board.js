@@ -1,6 +1,6 @@
 var board,
     numberHistory,
-    current,
+    current = null,
     winners = ['--', '--', '--'],
     rows = 'BINGO'.split(''),
     winnerListEnabled = false,
