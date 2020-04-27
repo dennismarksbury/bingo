@@ -27,9 +27,9 @@ function generateRandomBoardNumbers() {
     var usedNumbers = [];
     for (var rowNumber = 1; rowNumber < 6; rowNumber++) {
         for (var columnNumber = 0; columnNumber < 5; columnNumber++) {
-            var bingoNumber = randomIntFromInterval(columnNumber * 15, columnNumber * 15 + 15);
+            var bingoNumber = randomIntFromInterval(columnNumber * 15 + 1, columnNumber * 15 + 15);
             while (usedNumbers.indexOf(bingoNumber) > -1) {
-                bingoNumber = randomIntFromInterval(columnNumber * 15, columnNumber * 15 + 15);
+                bingoNumber = randomIntFromInterval(columnNumber * 15 + 1, columnNumber * 15 + 15);
             }
 
             usedNumbers.push(bingoNumber);

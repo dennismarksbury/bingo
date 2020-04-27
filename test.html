@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Dennis Marksbury - dennis.marksbury@gmail.com">
+</head>
+<body>
+    <div id="results"></div>
+
+    <script type="text/javascript">
+        function log(msg) {
+            var container = document.getElementById('results');
+            container.innerHTML += msg + '<br/>';
+        }
+        function randomIntFromInterval(min, max) { // min and max included
+            min = min === 0 ? 1 : min;
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        var test = [
+            { column: 0, min: 1, max: 15, selected: {} },
+            { column: 1, min: 16, max: 30, selected: {} },
+            { column: 2, min: 31, max: 45, selected: {} },
+            { column: 3, min: 46, max: 60, selected: {} },
+            { column: 4, min: 61, max: 75, selected: {} },
+        ];
+
+        // column 1
+        for (var rowI = 0; rowI < test.length; rowI++) {
+            var row = test[rowI];
+            for (var i = 0; i < 1000; i++) {
+                var bingoNumber = randomIntFromInterval(row.column * 15 + 1, row.column * 15 + 15);
+
+                if (!row.selected[bingoNumber]) {
+                    row.selected[bingoNumber] = 0;
+                }
+
+                row.selected[bingoNumber]++;
+
+                if (bingoNumber < row.min || bingoNumber > row.max) {
+                    log('FAIL: ' + ' Column: ' + row.column + ' Min: ' + row.min + ' Max: ' + row.max + ' DRAWN: ' + bingoNumber);
+                } else {
+                    //log('GOOD: ' + ' Column: ' + row.column + ' Min: ' + row.min + ' Max: ' + row.max + ' DRAWN: ' + bingoNumber);
+                }
+            }
+        }
+
+        log('DONE');
+        log(JSON.stringify(test));
+    </script>
+</body>
+</html>
